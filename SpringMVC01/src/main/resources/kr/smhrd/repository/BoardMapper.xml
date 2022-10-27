@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.smhrd.repository.BoardMapper">
+  
+  <!-- board table 모든 게시물을 가져오는 SQL -->
+  <select id="getList" resultType="kr.smhrd.entity.Board">
+     select * from board order by idx desc
+  </select>
+  <insert id="register" parameterType="kr.smhrd.entity.Board">
+     insert into board(title,content,writer)
+     values(#{title},#{content},#{writer})
+  </insert>
+  <select id="get" resultType="kr.smhrd.entity.Board" parameterType="int">
+    select * from board where idx=#{idx}
+  </select>
+  <delete id="remove" parameterType="int">
+    delete from board where idx=#{idx}
+  </delete>
+  <update id="update" parameterType="kr.smhrd.entity.Board">
+    update board set title=#{title},content=#{content} where idx=#{idx} 
+  </update>
+  <update id="countUpdate">
+    update board set count=count+1 where idx=#{idx} 
+  </update> 
+</mapper>
